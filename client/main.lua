@@ -92,11 +92,15 @@ function RefreshBlips()
   end
 end
 
-RegisterNetEvent("esx_property:syncProperties", function(properties, lastProperty)
+RegisterNetEvent("esx_property:syncProperties", function(properties, lastProperty, id)
   while not ESX.PlayerLoaded and not ESX.PlayerData.identifier do
     Wait(0)
   end
-  Properties = properties
+  if id then
+    Properties[id] = properties
+  else
+    Properties = properties
+  end
   for house, data in pairs(Properties) do
     if data.Keys then
       for ident, vaues in pairs(data.Keys) do
